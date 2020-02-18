@@ -6,15 +6,15 @@ FROM
     
 -- How many of each specific subclass?
 SELECT
-    COUNT(DISTINCT charactercreator_mage.character_ptr_id) AS MageCount,
-    COUNT(DISTINCT charactercreator_thief.character_ptr_id) AS ThiefCount,
-    COUNT(DISTINCT charactercreator_cleric.character_ptr_id) AS ClericCount,
-    COUNT(DISTINCT charactercreator_fighter.character_ptr_id) AS FighterCount
+    COUNT(DISTINCT m.character_ptr_id) AS MageCount,
+    COUNT(DISTINCT t.character_ptr_id) AS ThiefCount,
+    COUNT(DISTINCT c.character_ptr_id) AS ClericCount,
+    COUNT(DISTINCT f.character_ptr_id) AS FighterCount
 FROM
-    charactercreator_mage,
-    charactercreator_thief,
-    charactercreator_cleric,
-    charactercreator_fighter
+    charactercreator_mage m, 
+    charactercreator_thief t,
+    charactercreator_cleric c,
+    charactercreator_fighter f
     
 -- How many total Items?
 SELECT
