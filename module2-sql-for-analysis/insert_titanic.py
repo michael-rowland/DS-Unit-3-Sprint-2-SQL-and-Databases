@@ -18,6 +18,7 @@ cursor = connection.cursor()
 print('CURSOR:', cursor)
 
 query = """
+DROP TABLE IF EXISTS passengers;
 CREATE TABLE IF NOT EXISTS passengers (
     id SERIAL PRIMARY KEY,
     survived bool,
@@ -40,8 +41,8 @@ def write_rows():
         counter = 1
         for row in csvReader:
             if "'" in row[2]:
-                continue
-                name = f'$${row[2]}$$'
+                name = row[2].replace("'", '')
+
             else:
                 name = row[2]
             data = (counter, row[0], int(row[1]), name, row[3], float(row[4]), 
@@ -50,6 +51,7 @@ def write_rows():
             insert_query = f'''
             INSERT INTO passengers VALUES {data};
             '''
+            print(insert_query)
             cursor.execute(insert_query)
             counter += 1
 
@@ -57,4 +59,3 @@ def write_rows():
 write_rows()
 connection.commit()
 # connection.close()
-
