@@ -8,8 +8,9 @@ MONGO_USER = os.getenv('MONGO_USER')
 MONGO_PASS = os.getenv('MONGO_PASS')
 MONGO_SERVER = os.getenv('MONGO_SERVER')
 
+MONGO_URL = f"mongodb+srv://{MONGO_USER}:{MONGO_PASS}@{MONGO_SERVER}/test?retryWrites=true&w=majority"
 
-client = pymongo.MongoClient(f"mongodb+srv://{MONGO_USER}:{MONGO_PASS}@{MONGO_SERVER}/test?retryWrites=true&w=majority")
+client = pymongo.MongoClient(MONGO_URL)
 print('CLIENT:', client)
 
 # create new database
@@ -40,6 +41,9 @@ def write_rows():
             }
             collection.insert_one(passenger)
             counter += 1
+
+
+print(collection.count_documents({}))
 
 
 '''
